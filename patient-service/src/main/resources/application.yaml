@@ -1,0 +1,26 @@
+# Configuring the datasource for PostgreSQL
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/helthcare-app  # URL of the PostgreSQL database
+    username: postgres                                   # Database username
+    password: 1234                                       # Database password
+    driver-class-name: org.postgresql.Driver             # PostgreSQL JDBC driver
+
+  # JPA (Java Persistence API) configuration
+  jpa:
+    hibernate:
+      ddl-auto: update                                   # Automatically updates the database schema
+    show-sql: true                                       # Enables logging of SQL statements
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect # Specifies the SQL dialect for Hibernate
+
+  # Application-specific properties
+  application:
+    name: patient-service                                # Name of the Spring Boot application
+
+# Uncomment this section to enable basic security
+#  security:
+#    user:
+#      name: health                                      # Basic security username
+#      password: health1234                              # Basic security password
