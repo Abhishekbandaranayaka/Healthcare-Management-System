@@ -1,11 +1,13 @@
 spring:
-  application:
-    name: api-gateway
   datasource:
     url: jdbc:postgresql://localhost:5432/helthcare-app
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
+  #  security:
+  #    user:
+  #      name: health
+  #      password: health1234
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,9 +15,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-  main:
-    web-application-type: servlet
-
-
+  application:
+    name: doctor-service
 server:
-  port: 9000
+  port: 8081
