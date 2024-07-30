@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/healthcare-app
+    username: postgres
+    password: 123
+    driver-class-name: org.postgresql.Driver
+  #  security:
+  #    user:
+  #      name: health
+  #      password: health1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  application:
+    name: billing-service
+server:
+  port: 8085
