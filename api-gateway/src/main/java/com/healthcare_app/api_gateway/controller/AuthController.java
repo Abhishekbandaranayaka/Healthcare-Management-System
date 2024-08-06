@@ -6,6 +6,7 @@ import com.healthcare_app.api_gateway.dto.SignUpDto;
 import com.healthcare_app.api_gateway.dto.UserDto;
 import com.healthcare_app.api_gateway.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,15 +37,15 @@ public class AuthController {
      */
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody CredentialsDto credentialsDto) {
-        // Authenticate the user using the provided credentials
         UserDto user = userService.login(credentialsDto);
-
-        // Generate a JWT token for the authenticated user
-        user.setToken(userAuthProvider.createToken(user.getLogin()));
-
-        // Return the user details along with the token in the response
-        return ResponseEntity.ok(user);
+        if (user != null) {
+            user.setToken(userAuthProvider.createToken(user.getLogin(), user));
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
+
 
     /**
      * Handles user registration requests.
@@ -60,7 +61,7 @@ public class AuthController {
         UserDto user = userService.register(signUpDto);
 
         // Generate a JWT token for the newly registered user
-        user.setToken(userAuthProvider.createToken(user.getLogin()));
+        user.setToken(userAuthProvider.createToken(user.getLogin() ,user));
 
         // Return a response with the created user resource URI and user details
         return ResponseEntity.created(URI.create("/users/" + user.getId()))
