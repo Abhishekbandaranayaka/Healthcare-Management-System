@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Entity
-@Table(name = "bills")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity // Indicates that this class is an entity and will be mapped to a database table
+@Table(name = "bills") // Specifies the name of the database table to be used for mapping
+@Data // Generates getters, setters, toString, equals, and hashCode methods
+@AllArgsConstructor // Generates a constructor with all fields as parameters
+@NoArgsConstructor // Generates a no-argument constructor
 public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
