@@ -60,6 +60,7 @@ public class DoctorService {
             doctor.setLastName(doctorDetails.getLastName());
             doctor.setSpecialization(doctorDetails.getSpecialization());
             doctor.setContactInformation(doctorDetails.getContactInformation());
+            doctorRepository.save(doctor);
             return "Doctor details updated successfully";
         } else {
             return "Doctor details are not found";
