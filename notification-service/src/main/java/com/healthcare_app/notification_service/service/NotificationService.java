@@ -13,11 +13,18 @@ import java.util.logging.Logger;
 @Service
 public class NotificationService {
 
+
 //    private static final Logger logger = (Logger) LoggerFactory.getLogger(NotificationService.class);
 
     @Autowired
     private NotificationRepository notificationRepository;
-
+    /**
+     * Sends a notification to a specific patient by saving it in the database.
+     *
+     * @param patientId The ID of the patient to whom the notification is sent.
+     * @param message   The message content of the notification.
+     * @return The saved Notification object.
+     */
     public Notification sendNotification(Long patientId, String message) {
         Notification notification = new Notification();
         notification.setPatientId(patientId);
@@ -25,7 +32,11 @@ public class NotificationService {
         notification.setNotificationDate(LocalDateTime.now());
         return notificationRepository.save(notification);
     }
-
+    /**
+     * Retrieves a list of all notifications from the database.
+     *
+     * @return A list of Notification objects.
+     */
     public List<Notification> listNotifications() {
         return notificationRepository.findAll();
     }

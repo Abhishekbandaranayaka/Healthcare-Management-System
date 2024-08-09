@@ -10,6 +10,8 @@ import java.util.List;
 /**
  * The NotificationController class handles HTTP requests related to notifications.
  * It provides endpoints for sending and listing notifications.
+ * * Author: S.T Fernando
+ * *Date: 2024/07/29
  */
 @RestController
 @RequestMapping("/api/notifications")
