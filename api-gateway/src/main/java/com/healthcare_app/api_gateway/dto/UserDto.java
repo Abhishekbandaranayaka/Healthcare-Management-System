@@ -1,5 +1,6 @@
 package com.healthcare_app.api_gateway.dto;
 
+import com.healthcare_app.api_gateway.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -47,4 +48,5 @@ public class UserDto {
      * Used to manage user sessions and authorize access to protected resources.
      */
     private String token;
+    private Role role;
 }

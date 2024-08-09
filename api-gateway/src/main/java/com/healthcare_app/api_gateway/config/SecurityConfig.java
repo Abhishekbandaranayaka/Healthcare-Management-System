@@ -36,21 +36,49 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // Configure exception handling with a custom authentication entry point
+                // Configure custom authentication entry point for handling unauthorized access
                 .exceptionHandling().authenticationEntryPoint(userAuthenticationEntryPoint)
                 .and()
                 // Add the JWT authentication filter before the BasicAuthenticationFilter
                 .addFilterBefore(new JwtAuthFilter(userAuthProvider), BasicAuthenticationFilter.class)
-                .csrf().disable() // Disable CSRF protection as it's not needed for stateless APIs
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Ensure session management is stateless
+                // Disable CSRF protection as this is a stateless REST API using JWTs
+                .csrf().disable()
+                // Ensure session management is stateless
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 // Configure authorization rules for HTTP requests
                 .authorizeHttpRequests((requests) -> requests
-                        // Permit all requests to /login and /register (for POST methods)
+                        // Allow unauthenticated access to login and registration endpoints
                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
-                        // Require authentication for all other requests
+                        // Define authorization rules for /api/patients endpoints
+                        .requestMatchers(HttpMethod.GET, "/api/patients/**").hasAnyRole("PATIENT", "DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/patients/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/patients/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/patients/**").hasRole("ADMIN")
+                        // Define authorization rules for /api/doctor endpoints
+                        .requestMatchers(HttpMethod.GET, "/api/doctor/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/doctor/**").hasAnyRole("OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/doctor/**").hasAnyRole("OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/doctor/**").hasRole("ADMIN")
+                        // Define authorization rules for /api/appointments endpoints
+                        .requestMatchers(HttpMethod.GET, "/api/appointments/**").hasAnyRole("PATIENT", "DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/appointments/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/appointments/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/appointments/**").hasRole("ADMIN")
+                        // Define authorization rules for /api/medical_records endpoints
+                        .requestMatchers(HttpMethod.GET, "/api/medical_records/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/medical_records/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/medical_records/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        // Define authorization rules for /api/billing endpoints
+                        .requestMatchers(HttpMethod.GET, "/api/billing/**").hasAnyRole("OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/billing/**").hasAnyRole("OPERATOR", "ADMIN")
+                        // Define authorization rules for /api/notifications endpoints
+                        .requestMatchers(HttpMethod.GET, "/api/notifications/**").hasAnyRole("OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/notifications/**").hasAnyRole("OPERATOR", "ADMIN")
+                        // Require authentication for any other request
                         .anyRequest().authenticated()
                 );
-        return http.build(); // Build and return the configured SecurityFilterChain
+        // Build and return the configured SecurityFilterChain
+        return http.build();
     }
 }
