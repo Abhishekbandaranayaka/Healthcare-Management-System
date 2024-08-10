@@ -1,21 +1,29 @@
+# Configuring the datasource for PostgreSQL
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/healthcare-app
-    username: postgres
-    password: 123
-    driver-class-name: org.postgresql.Driver
-  #  security:
-  #    user:
-  #      name: health
-  #      password: health1234
+    url: jdbc:postgresql://localhost:5432/healthcare-app # URL of the PostgreSQL database
+    username: postgres                                   # Database username
+    password: 123                                      # Database password
+    driver-class-name: org.postgresql.Driver             # PostgreSQL JDBC driver
+
+  # JPA (Java Persistence API) configuration
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: update # Automatically updates the database schema
+    show-sql: true # Enables logging of SQL statements
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect # Specifies the SQL dialect for Hibernate
+
+
+  # Application-specific properties
   application:
-    name: billing-service
+    name: billing-service # Name of the Spring Boot application
 server:
   port: 8085
+
+  #Uncomment this section to enable basic security
+  #  security:
+  #    user:
+  #      name: health                                      # Basic security username
+  #      password: health1234                              # Basic security password
