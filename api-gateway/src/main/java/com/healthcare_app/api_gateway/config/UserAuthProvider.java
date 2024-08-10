@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.Date;
@@ -50,7 +51,7 @@ public class UserAuthProvider {
      * @param login The login identifier for the user.
      * @return A signed JWT token.
      */
-    public String createToken(String login) {
+    public String createToken(String login, UserDto user) {
         Date now = new Date();
         Date validity = new Date(now.getTime() + 3_600_000); // Token valid for 1 hour
 
@@ -58,6 +59,7 @@ public class UserAuthProvider {
                 .withIssuer(login) // Set the issuer as the login
                 .withIssuedAt(now) // Set the issued date
                 .withExpiresAt(validity) // Set the expiration date
+                .withClaim("role", user.getRole().name()) // Set the user's role claim
                 .sign(Algorithm.HMAC256(secretKey)); // Sign the token with the secret key
     }
 
@@ -78,6 +80,6 @@ public class UserAuthProvider {
         UserDto user = userService.findByLogin(decoded.getIssuer()); // Retrieve user details
 
         // Create an Authentication object with user details and empty authorities
-        return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
+        return new UsernamePasswordAuthenticationToken(user, null, Arrays.asList(user.getRole()));
     }
 }
