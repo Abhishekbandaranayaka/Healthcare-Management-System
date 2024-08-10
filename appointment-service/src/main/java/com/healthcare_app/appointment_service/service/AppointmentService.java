@@ -8,22 +8,49 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class for managing Appointment entities.
+ * Provides methods for CRUD operations and business logic related to appointments.
+ * Author: Ima Herath
+ */
 @Service
 public class AppointmentService {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
 
+    /**
+     * Retrieve all appointments from the database.
+     * @return List of all appointments.
+     */
     public List<Appointment> getAllAppointments(){
         return appointmentRepository.findAll();
     }
+
+    /**
+     * Retrieve an appointment by its ID.
+     * @param id The ID of the appointment to retrieve.
+     * @return An Optional containing the appointment if found, or empty if not found.
+     */
     public Optional<Appointment> getAppointmentById(Long id){
         return appointmentRepository.findById(id);
     }
+
+    /**
+     * Book a new appointment by saving it to the database.
+     * @param appointment The appointment entity to save.
+     * @return A success message.
+     */
     public String bookAppointment(Appointment appointment){
          appointmentRepository.save(appointment);
          return "Appointment booked successfully";
     }
+
+    /**
+     * Cancel an existing appointment by updating its status.
+     * @param id The ID of the appointment to cancel.
+     * @return A success or failure message.
+     */
     public String cancelAppointment(Long id){
         Optional<Appointment> optionalAppointment=appointmentRepository.findById(id);
         if (optionalAppointment.isPresent()){
@@ -35,6 +62,13 @@ public class AppointmentService {
             return "Appointment not found";
         }
     }
+
+    /**
+     * Update an existing appointment with new details.
+     * @param id The ID of the appointment to update.
+     * @param appointmentDetails The updated appointment details.
+     * @return A success or failure message.
+     */
     public String updateAppointment(Long id,Appointment appointmentDetails){
         Optional<Appointment> optionalAppointment=appointmentRepository.findById(id);
         if (optionalAppointment.isPresent()){
