@@ -1,0 +1,47 @@
+.upper-navbar .logo img {
+    height: 100px;
+    width: 318px;
+    padding-left: 50px;
+    padding-top: 20px;
+}
+.upper-navbar {
+    height: 100px;
+}
+.upper-navbar .search-bar {
+    width: 50%;
+    height: 43px;
+    border-radius: 50px;
+}
+
+.upper-navbar .social-icons a {
+    margin: 12px;
+    color: #333;
+}
+
+.upper-navbar .social-icons a:hover {
+    color: #007bff;
+}
+.navbar-lower{
+    height: 40px;
+}
+.navbar-nav{
+    margin-left: 30%;
+}
+.navbar-nav .nav-link {
+    color: #000000 !important;
+    margin-right: 80px;
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #007bff !important;
+}
+
+.notification-icon {
+    margin-right: 40px;
+    position: absolute;
+    right: 20px;
+    margin-bottom: 15px;
+}
