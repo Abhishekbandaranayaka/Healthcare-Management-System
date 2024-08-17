@@ -2,7 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/NavBar/NavBar';
 import Footer from "./components/Footer/Footer";
+
 import SideBar from "./components/SideBar/SideBar";
+
 // import Home from './pages/Home';
 // import Contact from './pages/Contact';
 // import Appointments from './pages/Appointments';
@@ -16,7 +18,9 @@ function App() {
       <Router>
         <div>
           <Navbar />
+
             <SideBar/>
+
           <Footer/>
         </div>
       </Router>
