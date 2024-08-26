@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="469cd5ec-9cdd-4ac8-86af-44550c7f672d" name="Changes" comment="" />
+    <list default="true" id="469cd5ec-9cdd-4ac8-86af-44550c7f672d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../doctor-service/src/main/java/com/healthcare_app/doctor_service/config.java" beforeDir="false" afterPath="$PROJECT_DIR$/../doctor-service/src/main/java/com/healthcare_app/doctor_service/config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../doctor-service/src/main/java/com/healthcare_app/doctor_service/contoller/DoctorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../doctor-service/src/main/java/com/healthcare_app/doctor_service/contoller/DoctorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../healthcare-frontend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../healthcare-frontend/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,9 +29,9 @@
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\wamp64\bin\php\php8.1.0\php.exe" />
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2kL5ykZYmqQZrPCNQH0d0NCMOWy" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -37,6 +42,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -59,6 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1723050276861</updated>
       <workItem from="1723050287436" duration="67000" />
+      <workItem from="1724435949592" duration="623000" />
     </task>
     <servers />
   </component>

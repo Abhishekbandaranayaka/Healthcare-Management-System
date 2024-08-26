@@ -21,7 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/doctor")
 @Validated
-@CrossOrigin(origins = "http://localhost:5173") // The frontend URL
+@CrossOrigin(origins = "http://localhost:3000") // The frontend URL
 public class DoctorController {
 
     @Autowired
