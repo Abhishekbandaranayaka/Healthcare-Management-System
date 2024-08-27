@@ -67,4 +67,5 @@ public class WebConfig {
         // Return the configured CORS filter
         return new CorsFilter(source);
     }
+
 }

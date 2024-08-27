@@ -1,7 +1,7 @@
 package com.healthcare_app.appointment_service.controller;
 
 import com.healthcare_app.appointment_service.model.Appointment;
-import com.healthcare_app.appointment_service.service.AppointmentService;
+import com.healthcare_app.appointment_service.service.AppointmentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +21,7 @@ import java.util.Optional;
 public class AppointmentController {
 
     @Autowired
-    private AppointmentService appointmentService;
+    private AppointmentServiceImpl appointmentService;
 
     /**
      * Get all appointments.
