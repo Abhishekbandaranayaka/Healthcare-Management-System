@@ -23,3 +23,14 @@ server:
 patient-service:
   base:
     url: http://localhost:8080
+
+admin:
+  login: "admin@example.com"
+  password: "StrongPassword123"
+  role: "admin"
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+
