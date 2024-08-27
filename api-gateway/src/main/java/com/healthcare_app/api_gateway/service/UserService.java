@@ -3,21 +3,22 @@ package com.healthcare_app.api_gateway.service;
 import com.healthcare_app.api_gateway.dto.CredentialsDto;
 import com.healthcare_app.api_gateway.dto.SignUpDto;
 import com.healthcare_app.api_gateway.dto.UserDto;
+import com.healthcare_app.api_gateway.entities.Doctor;
 import com.healthcare_app.api_gateway.entities.Patient;
 import com.healthcare_app.api_gateway.entities.User;
 import com.healthcare_app.api_gateway.enums.Role;
 import com.healthcare_app.api_gateway.exceptions.AppException;
 import com.healthcare_app.api_gateway.mappers.UserMapper;
+import com.healthcare_app.api_gateway.repository.DoctorRepository;
 import com.healthcare_app.api_gateway.repository.PatientRepository;
 import com.healthcare_app.api_gateway.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.reactive.function.client.WebClient;
+
+
 
 import java.nio.CharBuffer;
 import java.util.Optional;
@@ -34,6 +35,7 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final PatientRepository patientRepository;
+    private final DoctorRepository doctorRepository;
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
 
@@ -100,5 +102,47 @@ public class UserService {
 
         return userMapper.toUserDto(savedUser);
     }
+
+    /**
+     * Registers a new user with the role of doctor.
+     *
+     * @param userDto The data transfer object containing user registration details.
+     * @param role The role to assign to the new user (doctor or operator).
+     * @return A UserDto object containing registered user details.
+     * @throws AppException if the login already exists or if the role is not allowed.
+     */
+    public UserDto registerDoctor(SignUpDto userDto, Role role) {
+        Optional<User> optionalUser = userRepository.findByLogin(userDto.getLogin());
+
+        if (optionalUser.isPresent()) {
+            throw new AppException("Login already exists", HttpStatus.BAD_REQUEST);
+        }
+
+        if (role != Role.DOCTOR && role != Role.OPERATOR) {
+            throw new AppException("Invalid role for this operation", HttpStatus.BAD_REQUEST);
+        }
+
+        User user = userMapper.signUpToUser(userDto);
+        user.setRole(role);
+        user.setPassword(passwordEncoder.encode(CharBuffer.wrap(userDto.getPassword())));
+
+        User savedUser = userRepository.save(user);
+
+        // Save doctor details if role is DOCTOR
+        if (role == Role.DOCTOR) {
+            Doctor doctor = new Doctor();
+            doctor.setFirstName(userDto.getFirstName());
+            doctor.setLastName(userDto.getLastName());
+            doctor.setSpecialization("example-specialization"); // Ensure this field is available in SignUpDto
+            doctor.setContactInformation("example-contactInformation"); // Ensure this field is available in SignUpDto
+
+            doctorRepository.save(doctor);
+        }
+
+        return userMapper.toUserDto(savedUser);
+    }
+
+
+
 
 }
