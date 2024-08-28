@@ -10,3 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 }
+
+//If want add external method for this

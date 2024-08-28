@@ -1,0 +1,12 @@
+.upper-footer .logo img {
+    height: 100px;
+    width: 318px;
+}
+
+.footer-lower .social-icons a {
+    padding: 20px;
+
+.upper-footer .social-icons a {
+    margin: 12px;
+    color: #333;
+}

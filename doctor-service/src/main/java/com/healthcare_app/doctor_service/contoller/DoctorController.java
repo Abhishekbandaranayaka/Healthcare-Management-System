@@ -2,6 +2,7 @@ package com.healthcare_app.doctor_service.contoller;
 
 import com.healthcare_app.doctor_service.model.Doctor;
 import com.healthcare_app.doctor_service.service.DoctorService;
+import com.healthcare_app.doctor_service.service.DoctorServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/doctor")
 @Validated
-@CrossOrigin(origins = "http://localhost:5173") // The frontend URL
+@CrossOrigin(origins = "http://localhost:3000") // The frontend URL
 public class DoctorController {
 
     @Autowired

@@ -3,7 +3,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/helthcare-app  # URL of the PostgreSQL database
     username: postgres                                   # Database username
-    password: 1234                                       # Database password
+    password: 1234                                      # Database password
     driver-class-name: org.postgresql.Driver             # PostgreSQL JDBC driver
 
   # JPA (Java Persistence API) configuration
@@ -24,3 +24,6 @@ spring:
 #    user:
 #      name: health                                      # Basic security username
 #      password: health1234                              # Basic security password
+
+
+
