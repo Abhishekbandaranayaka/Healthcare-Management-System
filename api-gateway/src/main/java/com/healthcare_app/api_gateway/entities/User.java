@@ -1,5 +1,6 @@
 package com.healthcare_app.api_gateway.entities;
 
+import com.healthcare_app.api_gateway.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -56,4 +57,8 @@ public class User {
      */
     @Column(nullable = false)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 }

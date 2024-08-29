@@ -1,6 +1,5 @@
 package com.healthcare_app.api_gateway.config;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,14 +9,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-/**
- * Security configuration class for setting up web security in the application.
- * This class configures security filters, exception handling, and authorization rules.
- *
- * Author: B.T.M.A.S.D.B Rathnayaka
- * Date: 2024/07/29
- */
-@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -25,32 +16,44 @@ public class SecurityConfig {
     private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     private final UserAuthProvider userAuthProvider;
 
-    /**
-     * Configures the security filter chain for HTTP requests.
-     * Sets up custom authentication entry point, JWT filter, disables CSRF, and configures session management and request authorization.
-     *
-     * @param http The HttpSecurity object used to configure security settings.
-     * @return The configured SecurityFilterChain.
-     * @throws Exception If an error occurs during configuration.
-     */
+    public SecurityConfig(UserAuthenticationEntryPoint userAuthenticationEntryPoint, UserAuthProvider userAuthProvider) {
+        this.userAuthenticationEntryPoint = userAuthenticationEntryPoint;
+        this.userAuthProvider = userAuthProvider;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // Configure exception handling with a custom authentication entry point
                 .exceptionHandling().authenticationEntryPoint(userAuthenticationEntryPoint)
                 .and()
-                // Add the JWT authentication filter before the BasicAuthenticationFilter
                 .addFilterBefore(new JwtAuthFilter(userAuthProvider), BasicAuthenticationFilter.class)
-                .csrf().disable() // Disable CSRF protection as it's not needed for stateless APIs
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Ensure session management is stateless
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                // Configure authorization rules for HTTP requests
                 .authorizeHttpRequests((requests) -> requests
-                        // Permit all requests to /login and /register (for POST methods)
                         .requestMatchers(HttpMethod.POST, "/login", "/register").permitAll()
-                        // Require authentication for all other requests
+                        .requestMatchers(HttpMethod.POST, "/admin/doctor/register").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/patients/**").hasAnyRole("PATIENT", "DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/patients/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/patients/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/patients/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/doctor/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/doctor/**").hasAnyRole("OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/doctor/**").hasAnyRole("OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/doctor/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/appointments/**").hasAnyRole("PATIENT", "DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/appointments/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/appointments/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/appointments/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/medical_records/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/medical_records/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/medical_records/**").hasAnyRole("DOCTOR", "OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/billing/**").hasAnyRole("OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/billing/**").hasAnyRole("OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/notifications/**").hasAnyRole("OPERATOR", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/notifications/**").hasAnyRole("OPERATOR", "ADMIN")
                         .anyRequest().authenticated()
                 );
-        return http.build(); // Build and return the configured SecurityFilterChain
+        return http.build();
     }
 }
