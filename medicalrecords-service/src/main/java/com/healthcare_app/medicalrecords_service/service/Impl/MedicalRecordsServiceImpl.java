@@ -1,9 +1,12 @@
 package com.healthcare_app.medicalrecords_service.service.Impl;
 
+import com.healthcare_app.medicalrecords_service.exceptions.AppException;
 import com.healthcare_app.medicalrecords_service.model.MedicalRecords;
 import com.healthcare_app.medicalrecords_service.repository.MedicalRecordsRepository;
 import com.healthcare_app.medicalrecords_service.service.MedicalRecordsService;
+import com.healthcare_app.medicalrecords_service.util.MedicalRecordsConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,10 +49,17 @@ public class MedicalRecordsServiceImpl implements MedicalRecordsService {
      *
      * @param medicalRecords the medical record to create.
      * @return a message indicating the result of the creation process.
+     * @throws AppException If there's an error during the creation process.
      */
     public String createMedicalReport(MedicalRecords medicalRecords) {
-        medicalRecordsRepository.save(medicalRecords);
-        return "Medical-record created successfully";
+        try {
+            medicalRecordsRepository.save(medicalRecords); // Save the new medical record to the database
+            return MedicalRecordsConstants.Medical_record_created_successfully;
+        }catch (Exception e){
+            // Throw a custom exception if there's an error during record creation
+            throw new AppException("Error creating Medical-record", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     /**
@@ -57,8 +67,8 @@ public class MedicalRecordsServiceImpl implements MedicalRecordsService {
      *
      * @param id the ID of the medical record to update.
      * @param medicalRecordsDetails the updated details of the medical record.
-     * @return a message indicating the result of the update process,
-     * or a message indicating that the record was not found.
+     * @return A success message if the record is updated successfully.
+     * @throws AppException If the medical record is not found or an error occurs during the update.
      */
     public String updateMedicalRecord(String id, MedicalRecords medicalRecordsDetails) {
         Optional<MedicalRecords> optionalMedicalRecords = medicalRecordsRepository.findById(id);
@@ -69,11 +79,11 @@ public class MedicalRecordsServiceImpl implements MedicalRecordsService {
             medicalRecords.setMedicalHistory(medicalRecordsDetails.getMedicalHistory());
             medicalRecords.setDiagnosis(medicalRecordsDetails.getDiagnosis());
             medicalRecords.setTreatments(medicalRecordsDetails.getTreatments());
-            medicalRecordsRepository.save(medicalRecords);
-            return "Medical-record updated successfully";
+            medicalRecordsRepository.save(medicalRecords);// Save the updated record to the database
+            return MedicalRecordsConstants.Medical_record_updated_successfully;
         } else {
-            // If the medical record is not found, return a not found message.
-            return "Medical-record not found";
+            // Throw a custom exception if the medical record is not found
+            throw new AppException(MedicalRecordsConstants.Medical_record_not_found,HttpStatus.NOT_FOUND);
         }
     }
 }

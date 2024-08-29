@@ -1,7 +1,9 @@
 package com.healthcare_app.medicalrecords_service.controller;
 
+import com.healthcare_app.medicalrecords_service.exceptions.AppException;
 import com.healthcare_app.medicalrecords_service.model.MedicalRecords;
 import com.healthcare_app.medicalrecords_service.service.MedicalRecordsService;
+import com.healthcare_app.medicalrecords_service.util.MedicalRecordsConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -25,11 +27,18 @@ public class MedicalRecordsController {
     @Autowired
     private MedicalRecordsService medicalRecordsService;
 
+    // Exception handler for AppException, capturing any exceptions thrown in this controller
+    // and returning an appropriate HTTP status and message.
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<String> handleAppException(AppException ex) {
+        return ResponseEntity.status(ex.getCode()).body(ex.getMessage());
+    }
     /**
      * Retrieves all medical records.
      *
      * @return a list of all medical records.
      */
+
     @GetMapping
     public List<MedicalRecords> getAllMedicalRecords() {
         return medicalRecordsService.getAllMedicalRecords();
@@ -47,7 +56,7 @@ public class MedicalRecordsController {
         if (medicalRecord.isPresent()) {
             return ResponseEntity.ok(medicalRecord.get());
         } else {
-            return ResponseEntity.status(404).body("Medical record not found");
+            return ResponseEntity.status(404).body(MedicalRecordsConstants.Medical_record_not_found);
         }
     }
 
@@ -73,7 +82,7 @@ public class MedicalRecordsController {
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateMedicalRecord(@PathVariable String id, @RequestBody MedicalRecords medicalRecords) {
         String message = medicalRecordsService.updateMedicalRecord(id, medicalRecords);
-        if (message.equals("Medical-record updated successfully")) {
+        if (message.equals(MedicalRecordsConstants.Medical_record_updated_successfully)){
             return ResponseEntity.ok(message);
         } else {
             return ResponseEntity.status(404).body(message);
