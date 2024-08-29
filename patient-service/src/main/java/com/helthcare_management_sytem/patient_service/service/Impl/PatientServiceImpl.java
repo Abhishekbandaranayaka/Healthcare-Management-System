@@ -1,9 +1,12 @@
 package com.helthcare_management_sytem.patient_service.service.Impl;
 
+import com.helthcare_management_sytem.patient_service.exceptions.AppException;
 import com.helthcare_management_sytem.patient_service.model.Patient;
 import com.helthcare_management_sytem.patient_service.repository.PatientRepository;
 import com.helthcare_management_sytem.patient_service.service.PatientService;
+import com.helthcare_management_sytem.patient_service.util.PatientServiceConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,8 +47,12 @@ public class PatientServiceImpl implements PatientService {
      * @return A success message.
      */
     public String savePatient(Patient patient){
-        patientRepository.save(patient);
-        return "Patient saved successfully";
+        try {
+            patientRepository.save(patient);
+            return PatientServiceConstants.PATIENT_SAVED_SUCCESSFULLY;
+        }catch (Exception e){
+            throw new AppException("Error Saving Patient", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -63,9 +70,9 @@ public class PatientServiceImpl implements PatientService {
             patient.setPhoneNumber(patientDetails.getPhoneNumber());
             patient.setEmail(patientDetails.getEmail());
             patientRepository.save(patient);
-            return "Patient update successfully";
+            return PatientServiceConstants.PATIENT_UPDATE_SUCCESSFULLY;
         } else {
-            return "Patient not found!";
+            throw new AppException(PatientServiceConstants.PATIENT_NOT_FOUND,HttpStatus.NOT_FOUND);
         }
     }
 
@@ -77,9 +84,9 @@ public class PatientServiceImpl implements PatientService {
     public String deletePatient(Long id){
         if (patientRepository.existsById(id)){
             patientRepository.deleteById(id);
-            return "Patient delete successfully";
+            return PatientServiceConstants.PATIENT_DELETE_SUCCESSFULLY;
         } else {
-            return "Patient not found";
+            throw new AppException(PatientServiceConstants.PATIENT_NOT_FOUND,HttpStatus.NOT_FOUND);
         }
     }
 }
