@@ -63,4 +63,10 @@ public class Appointment {
      */
     @NotNull(message = "Status is mandatory")
     private String status;
+
+    @Transient
+    private String patientName;
+
+    @Transient
+    private String doctorName;
 }
