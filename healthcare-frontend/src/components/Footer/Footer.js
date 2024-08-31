@@ -53,7 +53,11 @@ const Footer = () => {
                           </li>
                       </ul>
                       <div className="social-icons px-5">
+
+                          <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><img  src="/assets/fb.png" alt="Facebook"/></a>
+
                           <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><img src="/assets/fb.png" alt="Facebook"/></a>
+
                           <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><img src="/assets/insta.png" alt="Instagram"/></a>
                           <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer"><img src="/assets/twitter.png" alt="Twitter"/></a>
                           <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"><img src="/assets/linkden.png" alt="Linkden"/></a>

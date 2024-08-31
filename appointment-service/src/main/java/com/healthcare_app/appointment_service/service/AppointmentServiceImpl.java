@@ -2,6 +2,8 @@ package com.healthcare_app.appointment_service.service;
 
 import com.healthcare_app.appointment_service.model.Appointment;
 import com.healthcare_app.appointment_service.repository.AppointmentRepository;
+import com.healthcare_app.appointment_service.repository.DoctorRepository;
+import com.healthcare_app.appointment_service.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Autowired
     private AppointmentRepository appointmentRepository;
+    @Autowired
+    private PatientRepository patientRepository;
+    @Autowired
+    private DoctorRepository doctorRepository;
 
     /**
      * Retrieve all appointments from the database.
@@ -41,9 +47,20 @@ public class AppointmentServiceImpl implements AppointmentService {
      * @param appointment The appointment entity to save.
      * @return A success message.
      */
-    public String bookAppointment(Appointment appointment){
-         appointmentRepository.save(appointment);
-         return "Appointment booked successfully";
+    public String bookAppointment(Appointment appointment) {
+        // Check if the patient exists
+        if (!patientRepository.existsById(appointment.getPatientId())) {
+            throw new IllegalArgumentException("Invalid Patient ID");
+        }
+
+        // Check if the doctor exists
+        if (!doctorRepository.existsById(appointment.getDoctorId())) {
+            throw new IllegalArgumentException("Invalid Doctor ID");
+        }
+
+        // Save the appointment if both exist
+        appointmentRepository.save(appointment);
+        return "Appointment booked successfully";
     }
 
     /**
