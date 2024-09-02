@@ -11,7 +11,14 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-  application:
-    name: appointment-service
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/healthcare-app
+      database: healthcare-app
+
+application:
+  name: appointment-service
+
 server:
   port: 8082
