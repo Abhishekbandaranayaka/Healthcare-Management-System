@@ -10,9 +10,6 @@ spring:
       org.springframework.data.mongodb: DEBUG
       com.mongodb: DEBUG
 
-#  autoconfigure:
-#    exclude:
-#      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 server:
   port: 8084
 
