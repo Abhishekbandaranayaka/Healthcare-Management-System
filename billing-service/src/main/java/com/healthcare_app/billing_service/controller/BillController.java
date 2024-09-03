@@ -39,7 +39,7 @@ public class BillController {
         return ResponseEntity.ok(processedPayment);// Returns the processed payment with HTTP 200 status
 
     }
-
+//add doc comments
     @GetMapping("/{id}")// Maps HTTP GET requests to /{id} endpoint to fetch bill details by ID
     public ResponseEntity<?> getBillingDetails(@PathVariable Long id) {
         Optional<Bill> bill = billService.getBillingDetails(id);// Calls service to get billing details by ID
