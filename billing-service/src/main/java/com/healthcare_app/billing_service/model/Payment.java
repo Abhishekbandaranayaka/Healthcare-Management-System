@@ -33,4 +33,7 @@ public class Payment {
 
     @NotNull(message = "Amount is mandatory") // Validates that amount cannot be null
     private Double amount;
+
+    @NotNull(message = "Payment date is mandatory")
+    private String paymentDate;
  }
