@@ -1,5 +1,6 @@
 package com.healthcare_app.billing_service.controller;
 
+import com.healthcare_app.billing_service.exceptions.AppException;
 import com.healthcare_app.billing_service.model.Bill;
 import com.healthcare_app.billing_service.model.Payment;
 import com.healthcare_app.billing_service.service.BillService;
@@ -15,44 +16,88 @@ import java.util.Optional;
  * REST controller for managing bills and payments.
  * Provides endpoints for CRUD operations.
  *  * Author: A.A.M.C Abesinghe
- *  * Date: 2024/08/08
+ *  * Date: 2024/09/02
  */
 
 
 
-@RestController // Marks this class as a REST controller, making it ready for handling HTTP requests
-@RequestMapping("/api/billing")// Specifies the base URL path for all endpoints in this controller
+@RestController
+@RequestMapping("/api/billing")
 public class BillController {
 
-    @Autowired// Injects an instance of BillService automatically
+    @Autowired
     private BillService billService;
 
-    @PostMapping("/create")// Maps HTTP POST requests to /create endpoint
+    /**
+     * Handles application-specific exceptions.
+     *
+     * @param ex The AppException thrown by the application.
+     * @return A ResponseEntity with the error message and status code.
+     */
+
+
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<String> handleAppException(AppException ex) {
+        return ResponseEntity.status(ex.getCode()).body(ex.getMessage());
+    }
+    /**
+     * Creates a new bill.
+     *
+     * @param bill The Bill object to be created.
+     * @return A ResponseEntity containing the created Bill object.
+     */
+
+
+    @PostMapping("/create")
     public ResponseEntity<Bill> createBill(@Valid @RequestBody Bill bill){
-        Bill createdBill = billService.createBill(bill);// Calls service to create a new bill
-        return ResponseEntity.ok(createdBill); // Returns the created bill with HTTP 200 status
+        Bill createdBill = billService.createBill(bill);
+        return ResponseEntity.ok(createdBill);
     }
+    /**
+     * Processes a payment.
+     *
+     * @param payment The Payment object to be processed.
+     * @return A ResponseEntity containing the processed Payment object.
+     */
 
-    @PostMapping("/process_payment")// Maps HTTP POST requests to /process_payment endpoint
+
+    @PostMapping("/process_payment")
     public ResponseEntity<Payment> processPayment(@RequestBody Payment payment) {
-        Payment processedPayment = billService.processPayment(payment);// Calls service to process the payment
-        return ResponseEntity.ok(processedPayment);// Returns the processed payment with HTTP 200 status
+        Payment processedPayment = billService.processPayment(payment);
+        return ResponseEntity.ok(processedPayment);
 
     }
 
-    @GetMapping("/{id}")// Maps HTTP GET requests to /{id} endpoint to fetch bill details by ID
+
+
+
+    /**
+     * Retrieves billing details for a specific bill by ID.
+     *
+     * @param id The ID of the bill to retrieve.
+     * @return A ResponseEntity containing the Bill object if found, or a 404 status with an error message if not found.
+     */
+
+
+    @GetMapping("/{id}")
+
     public ResponseEntity<?> getBillingDetails(@PathVariable Long id) {
-        Optional<Bill> bill = billService.getBillingDetails(id);// Calls service to get billing details by ID
+        Optional<Bill> bill = billService.getBillingDetails(id);
         if (bill.isPresent()) {
-            return ResponseEntity.ok(bill.get());// Returns the bill if found with HTTP 200 status
+            return ResponseEntity.ok(bill.get());
         } else {
-            return ResponseEntity.status(404).body("Bill not found"); // Returns 404 status if bill is not found
+            return ResponseEntity.status(404).body("Bill not found");
         }
     }
+    /**
+     * Lists all bills.
+     *
+     * @return A ResponseEntity containing a list of all Bill objects.
+     */
 
-    @GetMapping("/bills")// Maps HTTP GET requests to /bills endpoint to list all bills
+    @GetMapping("/bills")
     public ResponseEntity<List<Bill>> listBills() {
-        List<Bill> bills = billService.listBills();// Calls service to list all bills
-        return ResponseEntity.ok(bills); // Returns the list of bills with HTTP 200 status
+        List<Bill> bills = billService.listBills();
+        return ResponseEntity.ok(bills);
     }
 }
