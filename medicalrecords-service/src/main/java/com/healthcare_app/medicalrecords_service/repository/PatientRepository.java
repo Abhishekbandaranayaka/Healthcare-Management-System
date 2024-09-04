@@ -1,6 +1,6 @@
-package com.healthcare_app.appointment_service.repository;
+package com.healthcare_app.medicalrecords_service.repository;
 
-import com.healthcare_app.appointment_service.model.Patient;
+import com.healthcare_app.medicalrecords_service.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

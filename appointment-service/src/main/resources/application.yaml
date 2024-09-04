@@ -1,13 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/helthcare-app
+    url: jdbc:postgresql://localhost:5432/healthcare-app
     username: postgres
-    password: 1234
+    password: 123
     driver-class-name: org.postgresql.Driver
-  #  security:
-  #    user:
-  #      name: health
-  #      password: health1234
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,7 +11,14 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-  application:
-    name: appointment-service
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/healthcare-app
+      database: healthcare-app
+
+application:
+  name: appointment-service
+
 server:
   port: 8082
