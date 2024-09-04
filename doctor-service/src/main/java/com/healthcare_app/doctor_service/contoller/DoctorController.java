@@ -2,7 +2,7 @@ package com.healthcare_app.doctor_service.contoller;
 
 import com.healthcare_app.doctor_service.model.Doctor;
 import com.healthcare_app.doctor_service.service.DoctorService;
-import com.healthcare_app.doctor_service.service.DoctorServiceImpl;
+import com.healthcare_app.doctor_service.util.DoctorServiceConstants;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,7 +47,7 @@ public class DoctorController {
         if (doctor.isPresent()){
             return ResponseEntity.ok(doctor);
         } else {
-            return ResponseEntity.status(400).body("Doctor details not found");
+            return ResponseEntity.status(400).body(DoctorServiceConstants.DOCTOR_NOT_FOUND);
         }
     }
 
@@ -71,7 +71,7 @@ public class DoctorController {
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateDoctor(@PathVariable Long id,@Valid @RequestBody Doctor doctor){
         String message = doctorService.updateDoctor(id, doctor);
-        if (message.equals("Doctor details updated successfully")){
+        if (message.equals(DoctorServiceConstants.DOCTOR_UPDATED_SUCCESSFULLY)){
             return ResponseEntity.ok(message);
         } else {
             return ResponseEntity.status(404).body(message);
@@ -86,7 +86,7 @@ public class DoctorController {
     @DeleteMapping("delete/{id}")
     public ResponseEntity<String> deleteDoctor(@PathVariable Long id){
         String message = doctorService.deleteDoctor(id);
-        if (message.equals("Doctor information deleted")){
+        if (message.equals(DoctorServiceConstants.DOCTOR_DELETED_SUCCESSFULLY)){
             return ResponseEntity.ok(message);
         } else {
             return ResponseEntity.status(404).body(message);
