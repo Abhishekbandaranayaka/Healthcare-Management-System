@@ -1,8 +1,12 @@
-package com.healthcare_app.doctor_service.service;
+package com.healthcare_app.doctor_service.service.impl;
 
+import com.healthcare_app.doctor_service.exception.AppException;
 import com.healthcare_app.doctor_service.model.Doctor;
 import com.healthcare_app.doctor_service.repository.DoctorRepository;
+import com.healthcare_app.doctor_service.service.DoctorService;
+import com.healthcare_app.doctor_service.util.DoctorServiceConstants;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +18,7 @@ import java.util.Optional;
  * Author: R.A.U.K.WIJESEKARA
  */
 @Service
-public class DoctorServiceImpl implements DoctorService{
-
+public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
 
@@ -42,8 +45,12 @@ public class DoctorServiceImpl implements DoctorService{
      * @return A success message.
      */
     public String saveDoctor(Doctor doctor){
-        doctorRepository.save(doctor);
-        return "Doctor saved successfully";
+        try {
+            doctorRepository.save(doctor);
+            return DoctorServiceConstants.DOCTOR_SAVED_SUCCESSFULLY;
+        }catch (Exception e){
+            throw new AppException("Error Saving Doctor", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -61,9 +68,9 @@ public class DoctorServiceImpl implements DoctorService{
             doctor.setSpecialization(doctorDetails.getSpecialization());
             doctor.setContactInformation(doctorDetails.getContactInformation());
             doctorRepository.save(doctor);
-            return "Doctor details updated successfully";
+            return DoctorServiceConstants.DOCTOR_UPDATED_SUCCESSFULLY;
         } else {
-            return "Doctor details are not found";
+            throw new AppException(DoctorServiceConstants.DOCTOR_NOT_FOUND,HttpStatus.NOT_FOUND);
         }
     }
 
@@ -75,9 +82,9 @@ public class DoctorServiceImpl implements DoctorService{
     public String deleteDoctor(Long id){
         if (doctorRepository.existsById(id)){
             doctorRepository.deleteById(id);
-            return "Doctor information deleted Successfully";
+            return DoctorServiceConstants.DOCTOR_DELETED_SUCCESSFULLY;
         } else {
-            return "Doctor details are not found";
+            throw new AppException(DoctorServiceConstants.DOCTOR_NOT_FOUND,HttpStatus.NOT_FOUND);
         }
     }
 
