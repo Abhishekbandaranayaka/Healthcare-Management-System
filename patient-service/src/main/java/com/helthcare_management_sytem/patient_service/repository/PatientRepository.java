@@ -3,6 +3,8 @@ package com.helthcare_management_sytem.patient_service.repository;
 import com.helthcare_management_sytem.patient_service.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 /**
  * Repository interface for the Patient entity.
  * Extends JpaRepository to provide CRUD operations and query methods.
@@ -10,4 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *  * Date: 2024/07/01
  */
 public interface PatientRepository extends JpaRepository<Patient , Long> {
+    List<Patient> findByName(String name);
+
 }
