@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
-    List<Doctor> findByName(String name);
+    List<Doctor> findByFirstName(String firstName);
 
 }
 
