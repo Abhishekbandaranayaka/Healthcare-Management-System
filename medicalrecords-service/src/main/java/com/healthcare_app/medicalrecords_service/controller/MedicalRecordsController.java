@@ -88,4 +88,19 @@ public class MedicalRecordsController {
             return ResponseEntity.status(404).body(message);
         }
     }
+
+    /**
+     * Find medical records by patientId.
+     * @param patientId The ID of the patient to search for.
+     * @return ResponseEntity with a list of medical records or a 404 status if not found.
+     */
+    @GetMapping("/findByPatientId/{patientId}")
+    public ResponseEntity<List<MedicalRecords>> findByPatientId(@PathVariable Long patientId) {
+        List<MedicalRecords> medicalRecords = medicalRecordsService.findByPatientId(patientId);
+        if (medicalRecords.isEmpty()) {
+            return ResponseEntity.status(404).body(null);
+        }
+        return ResponseEntity.ok(medicalRecords);
+    }
+
 }
