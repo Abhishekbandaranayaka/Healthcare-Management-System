@@ -44,6 +44,9 @@ public class AppointmentServiceImpl implements AppointmentService {
             if (doctor != null) {
                 appointment.setDoctorName(doctor.getFirstName() + " " + doctor.getLastName());
             }
+            if(doctor != null){
+                appointment.setSpecialization(doctor.getSpecialization());
+            }
         }
         return appointments;
     }
@@ -64,6 +67,9 @@ public class AppointmentServiceImpl implements AppointmentService {
             }
             if (doctor != null) {
                 appointment.setDoctorName(doctor.getFirstName() + " " + doctor.getLastName());
+            }
+            if(doctor != null){
+                appointment.setSpecialization(doctor.getSpecialization());
             }
         }
         return optionalAppointment;
