@@ -88,4 +88,17 @@ public class DoctorServiceImpl implements DoctorService {
         }
     }
 
+    /**
+     * Find doctors by name.
+     * @param name The name of the doctor to search for.
+     * @return List of doctors with the given name.
+     */
+    public List<Doctor> findByName(String name) {
+        List<Doctor> doctors = doctorRepository.findByName(name);
+        if (doctors.isEmpty()) {
+            throw new AppException(DoctorServiceConstants.DOCTOR_NOT_FOUND, HttpStatus.NOT_FOUND);
+        }
+        return doctors;
+    }
+
 }
