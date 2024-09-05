@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 /**
  * The Notification class represents a notification entity that is stored in the MongoDB database.
  * It contains information about notifications sent to patients.
+ * * Author: S.T Fernando
+ * * Date: 2024/07/29
  */
 @Document(collection = "notifications")
 @Data

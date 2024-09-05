@@ -4,8 +4,6 @@ import com.healthcare_app.medicalrecords_service.model.MedicalRecords;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 /**
  * This interface represents the repository for managing MedicalRecords entities.
  * It extends MongoRepository to provide CRUD operations on the MedicalRecords collection in MongoDB.
@@ -15,7 +13,5 @@ import java.util.List;
  */
 @Repository
 public interface MedicalRecordsRepository extends MongoRepository<MedicalRecords, String> {
-
-    List<MedicalRecords> findByPatientId(Long patientId);
-
+    // Additional query methods can be defined here if needed.
 }
