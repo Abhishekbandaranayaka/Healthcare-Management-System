@@ -5,20 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="469cd5ec-9cdd-4ac8-86af-44550c7f672d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/model/Notification.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/repository/NotificationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/service/NotificationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/service/NotificationServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appointment-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../appointment-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/AppointmentServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/AppointmentServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/repository/AppointmentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/repository/AppointmentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/repository/DoctorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/repository/DoctorRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/repository/PatientRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/repository/PatientRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/model/Appointment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/service/AppointmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/service/AppointmentServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../appointment-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../appointment-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../billing-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../billing-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../doctor-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../doctor-service/src/main/resources/application.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../patient-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../patient-service/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,22 +42,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="NotificationServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
@@ -84,6 +79,9 @@
       <workItem from="1723050287436" duration="67000" />
       <workItem from="1724435949592" duration="623000" />
       <workItem from="1724993920670" duration="2370000" />
+      <workItem from="1725457079812" duration="649000" />
+      <workItem from="1725466820953" duration="1198000" />
+      <workItem from="1725480045405" duration="1655000" />
     </task>
     <servers />
   </component>
