@@ -44,4 +44,6 @@ public interface MedicalRecordsService {
      * @return a message indicating the result of the update process.
      */
     String updateMedicalRecord(String id, MedicalRecords medicalRecordsDetails);
+
+    List<MedicalRecords> findByPatientId(Long patientId);
 }

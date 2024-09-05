@@ -89,4 +89,17 @@ public class PatientServiceImpl implements PatientService {
             throw new AppException(PatientServiceConstants.PATIENT_NOT_FOUND,HttpStatus.NOT_FOUND);
         }
     }
+
+    /**
+     * Find patients by name.
+     * @param name The name of the patient to search for.
+     * @return List of patients with the given name.
+     */
+    public List<Patient> findByName(String name) {
+        List<Patient> patients = patientRepository.findByName(name);
+        if (patients.isEmpty()) {
+            throw new AppException(PatientServiceConstants.PATIENT_NOT_FOUND, HttpStatus.NOT_FOUND);
+        }
+        return patients;
+    }
 }

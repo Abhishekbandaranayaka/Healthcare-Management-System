@@ -13,8 +13,15 @@ import java.util.Optional;
 public interface AppointmentService {
 
     List<Appointment> getAllAppointments();
+
     Optional<Appointment> getAppointmentById(Long id);
+
+    List<Appointment> findByStatus(String status);
+
     String bookAppointment(Appointment appointment);
+
     String cancelAppointment(Long id);
-    String updateAppointment(Long id,Appointment appointmentDetails);
+
+    String updateAppointment(Long id, Appointment appointmentDetails);
 }
+

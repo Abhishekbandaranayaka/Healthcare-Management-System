@@ -3,7 +3,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/healthcare-app # URL of the PostgreSQL database
     username: postgres                                   # Database username
-    password: 1234                                      # Database password
+    password: 123                                      # Database password
     driver-class-name: org.postgresql.Driver             # PostgreSQL JDBC driver
 
   # JPA (Java Persistence API) configuration

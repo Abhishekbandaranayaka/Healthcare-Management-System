@@ -2,7 +2,9 @@ package com.healthcare_app.medicalrecords_service.service.Impl;
 
 import com.healthcare_app.medicalrecords_service.exceptions.AppException;
 import com.healthcare_app.medicalrecords_service.model.MedicalRecords;
+import com.healthcare_app.medicalrecords_service.model.Patient;
 import com.healthcare_app.medicalrecords_service.repository.MedicalRecordsRepository;
+import com.healthcare_app.medicalrecords_service.repository.PatientRepository;
 import com.healthcare_app.medicalrecords_service.service.MedicalRecordsService;
 import com.healthcare_app.medicalrecords_service.util.MedicalRecordsConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class MedicalRecordsServiceImpl implements MedicalRecordsService {
     // Injecting the MedicalRecordsRepository to interact with the database.
     @Autowired
     private MedicalRecordsRepository medicalRecordsRepository;
+
+    @Autowired
+    private PatientRepository patientRepository;
 
     /**
      * Retrieves all medical records from the database.
@@ -53,13 +58,23 @@ public class MedicalRecordsServiceImpl implements MedicalRecordsService {
      */
     public String createMedicalReport(MedicalRecords medicalRecords) {
         try {
-            medicalRecordsRepository.save(medicalRecords); // Save the new medical record to the database
+            // Check if the patient exists
+            Optional<Patient> existingPatient = patientRepository.findById(medicalRecords.getPatientId());
+
+            if (existingPatient.isEmpty()) {
+                // Create and save the new patient if it doesn't exist
+                Patient newPatient = new Patient();
+                newPatient.setId(medicalRecords.getPatientId()); // Set patient ID (Adjust as needed)
+                // Optionally set other patient details if available
+                patientRepository.save(newPatient);
+            }
+
+            // Save the new medical record to the database
+            medicalRecordsRepository.save(medicalRecords);
             return MedicalRecordsConstants.Medical_record_created_successfully;
-        }catch (Exception e){
-            // Throw a custom exception if there's an error during record creation
+        } catch (Exception e) {
             throw new AppException("Error creating Medical-record", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
     }
 
     /**
@@ -85,5 +100,18 @@ public class MedicalRecordsServiceImpl implements MedicalRecordsService {
             // Throw a custom exception if the medical record is not found
             throw new AppException(MedicalRecordsConstants.Medical_record_not_found,HttpStatus.NOT_FOUND);
         }
+    }
+
+    /**
+     * Find medical-records by patientId.
+     * @param patientId The patientId of the medical-record to search for.
+     * @return List of medical-records with the given patientId.
+     */
+    public List<MedicalRecords> findByPatientId(Long patientId) {
+        List<MedicalRecords> medicalRecords = medicalRecordsRepository.findByPatientId(patientId);
+        if (medicalRecords.isEmpty()) {
+            throw new AppException(MedicalRecordsConstants.Medical_record_not_found, HttpStatus.NOT_FOUND);
+        }
+        return medicalRecords;
     }
 }

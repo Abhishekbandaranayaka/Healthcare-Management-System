@@ -64,6 +64,20 @@ public class PatientController {
     }
 
     /**
+     * Find patients by name.
+     * @param name The name of the patient to search for.
+     * @return ResponseEntity with a list of patients or a 404 status if not found.
+     */
+    @GetMapping("/findByName")
+    public ResponseEntity<List<Patient>> findPatientsByName(@RequestParam String name) {
+        List<Patient> patients = patientService.findByName(name);
+        if (patients.isEmpty()) {
+            return ResponseEntity.status(404).body(null);
+        }
+        return ResponseEntity.ok(patients);
+    }
+
+    /**
      * Create a new patient.
      * @param patient The patient entity to create.
      * @return ResponseEntity with a success message.
