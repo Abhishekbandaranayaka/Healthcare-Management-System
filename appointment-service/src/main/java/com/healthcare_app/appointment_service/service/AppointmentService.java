@@ -16,6 +16,8 @@ public interface AppointmentService {
 
     Optional<Appointment> getAppointmentById(Long id);
 
+    List<Appointment> findByStatus(String status);
+
     String bookAppointment(Appointment appointment);
 
     String cancelAppointment(Long id);

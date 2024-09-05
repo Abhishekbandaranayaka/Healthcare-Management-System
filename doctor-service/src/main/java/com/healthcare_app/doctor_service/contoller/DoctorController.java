@@ -52,6 +52,20 @@ public class DoctorController {
     }
 
     /**
+     * Find doctors by name.
+     * @param name The name of the doctor to search for.
+     * @return ResponseEntity with a list of doctors or a 404 status if not found.
+     */
+    @GetMapping("/findByName")
+    public ResponseEntity<List<Doctor>> findPatientsByName(@RequestParam String name) {
+        List<Doctor> doctors = doctorService.findByName(name);
+        if (doctors.isEmpty()) {
+            return ResponseEntity.status(404).body(null);
+        }
+        return ResponseEntity.ok(doctors);
+    }
+
+    /**
      * Create a new doctor.
      * @param doctor The doctor entity to create.
      * @return ResponseEntity with a success message.

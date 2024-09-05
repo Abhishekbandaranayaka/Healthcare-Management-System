@@ -51,6 +51,20 @@ public class AppointmentController {
     }
 
     /**
+     * Find appointments by status.
+     * @param status The name of the appointment to search for.
+     * @return ResponseEntity with a list of appointments or a 404 status if not found.
+     */
+    @GetMapping("/findByName")
+    public ResponseEntity<List<Appointment>> findPatientsByName(@RequestParam String status) {
+        List<Appointment> appointments = appointmentService.findByStatus(status);
+        if (appointments.isEmpty()) {
+            return ResponseEntity.status(404).body(null);
+        }
+        return ResponseEntity.ok(appointments);
+    }
+
+    /**
      * Book a new appointment.
      * @param appointment The appointment entity to create.
      * @return ResponseEntity with a success message.
