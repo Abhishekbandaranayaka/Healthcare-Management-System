@@ -40,4 +40,10 @@ public class NotificationController {
         List<Notification> notifications = notificationService.listNotifications();
         return ResponseEntity.ok(notifications);
     }
+
+    @GetMapping("/patient/{patientId}")
+    public ResponseEntity<List<Notification>> getNotificationByPatientId(@PathVariable Long patientId){
+        List<Notification> notifications = notificationService.getNotificationsByPatientId(patientId);
+        return ResponseEntity.ok(notifications);
+    }
 }
