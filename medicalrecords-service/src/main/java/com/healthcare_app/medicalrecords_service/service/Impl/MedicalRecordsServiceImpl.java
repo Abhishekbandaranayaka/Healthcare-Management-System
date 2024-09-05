@@ -101,17 +101,4 @@ public class MedicalRecordsServiceImpl implements MedicalRecordsService {
             throw new AppException(MedicalRecordsConstants.Medical_record_not_found,HttpStatus.NOT_FOUND);
         }
     }
-
-    /**
-     * Find medical-records by patientId.
-     * @param patientId The patientId of the medical-record to search for.
-     * @return List of medical-records with the given patientId.
-     */
-    public List<MedicalRecords> findByPatientId(Long patientId) {
-        List<MedicalRecords> medicalRecords = medicalRecordsRepository.findByPatientId(patientId);
-        if (medicalRecords.isEmpty()) {
-            throw new AppException(MedicalRecordsConstants.Medical_record_not_found, HttpStatus.NOT_FOUND);
-        }
-        return medicalRecords;
-    }
 }
