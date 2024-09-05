@@ -69,4 +69,7 @@ public class Appointment {
 
     @Transient
     private String doctorName;
+
+    @Transient
+    private String specialization;
 }

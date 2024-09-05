@@ -6,6 +6,7 @@ import com.healthcare_app.billing_service.model.Payment;
 import com.healthcare_app.billing_service.repository.BillRepository;
 import com.healthcare_app.billing_service.repository.PaymentRepository;
 import com.healthcare_app.billing_service.service.BillService;
+import com.healthcare_app.billing_service.util.BillServiceConstants;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -121,4 +122,19 @@ public class BillServiceImpl implements BillService {
             throw new AppException(HttpStatus.INTERNAL_SERVER_ERROR, "Error retrieving bills: " + e.getMessage());
         }
     }
+
+    /**
+     * Find bills by status.
+     * @param status The status of the bills to search for.
+     * @return List of bills with the given status.
+     */
+    public List<Bill> findByStatus(String status) {
+        List<Bill> bills = billRepository.findByStatus(status);
+        if (bills.isEmpty()) {
+            throw new AppException(HttpStatus.BAD_REQUEST,
+                    "Error retrieving bills: No bills found with status " + status);
+        }
+        return bills;
+    }
+
 }

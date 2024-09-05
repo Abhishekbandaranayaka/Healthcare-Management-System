@@ -68,8 +68,19 @@ public class BillController {
 
     }
 
-
-
+    /**
+     * Find bills by status.
+     * @param status The name of the bill to search for.
+     * @return ResponseEntity with a list of bills or a 404 status if not found.
+     */
+    @GetMapping("/findByStatus")
+    public ResponseEntity<List<Bill>> findByStatus(@RequestParam String status) {
+        List<Bill> bills = billService.findByStatus(status);
+        if (bills.isEmpty()) {
+            return ResponseEntity.status(404).body(null);
+        }
+        return ResponseEntity.ok(bills);
+    }
 
     /**
      * Retrieves billing details for a specific bill by ID.

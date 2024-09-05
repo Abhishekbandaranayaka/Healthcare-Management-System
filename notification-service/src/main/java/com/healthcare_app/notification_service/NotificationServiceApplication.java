@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * The NotificationServiceApplication class is the entry point for the Notification Service Spring Boot application.
+ * * Author: S.T Fernando
+ * *Date: 2024/07/29
  */
 @SpringBootApplication
 public class NotificationServiceApplication {

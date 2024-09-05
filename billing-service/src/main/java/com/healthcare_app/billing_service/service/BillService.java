@@ -11,5 +11,6 @@ public interface BillService {
     Payment processPayment(Payment payment);
     Optional<Bill> getBillingDetails(Long id);
     List<Bill> listBills();
+    List<Bill> findByStatus(String status);
 
 }
