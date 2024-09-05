@@ -4,40 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="469cd5ec-9cdd-4ac8-86af-44550c7f672d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../api-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/model/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/service/AppointmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../appointment-service/src/main/java/com/healthcare_app/appointment_service/service/AppointmentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../appointment-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../appointment-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../billing-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../billing-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../doctor-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../doctor-service/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../patient-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../patient-service/src/main/resources/application.yaml" afterDir="false" />
+    <list default="true" id="f82ed299-6d2c-47ff-95ca-2f5d412d8b82" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/healthcare_app/notification_service/exception/AppException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/healthcare_app/notification_service/service/NotificationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/healthcare_app/notification_service/service/NotificationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/healthcare_app/notification_service/util/NotificationServiceConstant.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
-    <execution />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
-      </MavenGeneralSettings>
-    </option>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\wamp64\bin\php\php8.1.0\php.exe" />
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 1
+  &quot;associatedIndex&quot;: 8
 }</component>
-  <component name="ProjectId" id="2kL5ykZYmqQZrPCNQH0d0NCMOWy" />
+  <component name="ProjectId" id="2jDv9r3WlXHMjNlimX89z6qaJ7n" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -50,11 +45,17 @@
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.NotificationServiceApplication.executor&quot;: &quot;Run&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/sadulafernando/Desktop/notification-service (1)&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -68,20 +69,43 @@
       </method>
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="469cd5ec-9cdd-4ac8-86af-44550c7f672d" name="Changes" comment="" />
-      <created>1723050276861</created>
+      <changelist id="f82ed299-6d2c-47ff-95ca-2f5d412d8b82" name="Changes" comment="" />
+      <created>1720934314785</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1723050276861</updated>
-      <workItem from="1723050287436" duration="67000" />
-      <workItem from="1724435949592" duration="623000" />
-      <workItem from="1724993920670" duration="2370000" />
-      <workItem from="1725457079812" duration="649000" />
-      <workItem from="1725466820953" duration="1198000" />
-      <workItem from="1725480045405" duration="1655000" />
+      <updated>1720934314785</updated>
+      <workItem from="1720934315764" duration="4160000" />
+      <workItem from="1720939754475" duration="14000" />
+      <workItem from="1722282690876" duration="1049000" />
+      <workItem from="1722286435071" duration="80000" />
+      <workItem from="1722336165124" duration="247000" />
+      <workItem from="1722345946127" duration="1063000" />
+      <workItem from="1723191826811" duration="554000" />
+      <workItem from="1723192401151" duration="39000" />
+      <workItem from="1723192505157" duration="5000" />
+      <workItem from="1723192882842" duration="23000" />
+      <workItem from="1723193393536" duration="162000" />
+      <workItem from="1723219569933" duration="3200000" />
+      <workItem from="1723252038737" duration="721000" />
+      <workItem from="1723255884859" duration="8364000" />
+      <workItem from="1723286227288" duration="363000" />
+      <workItem from="1723828927332" duration="1946000" />
+      <workItem from="1723879689511" duration="1072000" />
+      <workItem from="1724105423035" duration="394000" />
+      <workItem from="1725077032729" duration="2402000" />
+      <workItem from="1725440739519" duration="7978000" />
+      <workItem from="1725519986460" duration="966000" />
     </task>
     <servers />
   </component>
