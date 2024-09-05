@@ -53,6 +53,9 @@ public class AppointmentServiceImpl implements AppointmentService {
             if (doctor != null) {
                 appointment.setDoctorName(doctor.getFirstName() + " " + doctor.getLastName());
             }
+            if(doctor != null){
+                appointment.setSpecialization(doctor.getSpecialization());
+            }
         }
         return appointments;
     }
@@ -74,6 +77,9 @@ public class AppointmentServiceImpl implements AppointmentService {
             }
             if (doctor != null) {
                 appointment.setDoctorName(doctor.getFirstName() + " " + doctor.getLastName());
+            }
+            if(doctor != null){
+                appointment.setSpecialization(doctor.getSpecialization());
             }
         }
         return optionalAppointment;
@@ -153,5 +159,19 @@ public class AppointmentServiceImpl implements AppointmentService {
         } else {
             throw new AppException(AppointmentServiceConstants.APPOINTMENT_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
+    }
+
+    /**
+     * Find appointments by status
+     * @param status The status of te appointment to search for
+     * @return List of appointments with the status
+     */
+    @Override
+    public List<Appointment> findByStatus(String status){
+        List<Appointment> appointments = appointmentRepository.findByStatus(status);
+        if ((appointments.isEmpty())){
+            throw new AppException(AppointmentServiceConstants.APPOINTMENT_NOT_FOUND,HttpStatus.NOT_FOUND);
+        }
+        return appointments;
     }
 }

@@ -21,4 +21,6 @@ public interface PatientService {
     String updatePatient(Long id, Patient patientDetails);
 
     String deletePatient(Long id);
+
+    List<Patient> findByName(String name);
 }
