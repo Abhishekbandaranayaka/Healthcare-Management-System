@@ -1,52 +1,47 @@
 package com.healthcare_app.medicalrecords_service.service;
 
 import com.healthcare_app.medicalrecords_service.model.MedicalRecords;
-import com.healthcare_app.medicalrecords_service.repository.MedicalRecordsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
- * This service class handles the business logic for managing medical records.
- * It interacts with the MedicalRecordsRepository to perform CRUD operations.
+ * This interface defines the service layer methods for managing medical records.
+ * It provides the contract for the operations that can be performed on medical records.
+ *  * Author: P.K.N. Dharmasena
+ *  * Date: 2024/07/27
  */
+public interface MedicalRecordsService {
 
-@Service
-public class MedicalRecordsService {
+    /**
+     * Retrieves all medical records.
+     *
+     * @return a list of all medical records.
+     */
+    List<MedicalRecords> getAllMedicalRecords();
 
-    @Autowired
-    private MedicalRecordsRepository medicalRecordsRepository;
+    /**
+     * Retrieves a specific medical record by its ID.
+     *
+     * @param id the ID of the medical record to retrieve.
+     * @return an Optional containing the medical record if found, or empty if not found.
+     */
+    Optional<MedicalRecords> getMedicalRecordById(String id);
 
-    //Retrieve all medical records.
-    public List<MedicalRecords> getAllMedicalRecords() {
-        return medicalRecordsRepository.findAll();
-    }
-    //Retrieve a medical record by its ID.
-    public Optional<MedicalRecords> getMedicalRecordById(String id) {
-        return medicalRecordsRepository.findById(id);
-    }
+    /**
+     * Creates a new medical record.
+     *
+     * @param medicalRecords the medical record to create.
+     * @return a message indicating the result of the creation process.
+     */
+    String createMedicalReport(MedicalRecords medicalRecords);
 
-    //Create a new medical record.
-    public String createMedicalReport(MedicalRecords medicalRecords){
-        medicalRecordsRepository.save(medicalRecords);
-        return "Medical-record created successfully";
-    }
-
-    //Update an existing medical record by its ID.
-    public String updateMedicalRecord(String id , MedicalRecords medicalRecordsDetails){
-        Optional<MedicalRecords> optionalMedicalRecords = medicalRecordsRepository.findById(id);
-        if (optionalMedicalRecords.isPresent()){
-            MedicalRecords medicalRecords = optionalMedicalRecords.get();
-            medicalRecords.setPatientId(medicalRecords.getPatientId());
-            medicalRecords.setMedicalHistory(medicalRecordsDetails.getMedicalHistory());
-            medicalRecords.setDiagnosis(medicalRecordsDetails.getDiagnosis());
-            medicalRecords.setTreatments(medicalRecordsDetails.getTreatments());
-            medicalRecordsRepository.save(medicalRecords);
-            return "Medical-record updated successfully";
-        } else {
-            return "Medical-record not found";
-        }
-    }
+    /**
+     * Updates an existing medical record by its ID.
+     *
+     * @param id the ID of the medical record to update.
+     * @param medicalRecordsDetails the updated details of the medical record.
+     * @return a message indicating the result of the update process.
+     */
+    String updateMedicalRecord(String id, MedicalRecords medicalRecordsDetails);
 }

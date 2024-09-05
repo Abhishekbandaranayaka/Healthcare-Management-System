@@ -1,7 +1,9 @@
 package com.helthcare_management_sytem.patient_service.controller;
 
+import com.helthcare_management_sytem.patient_service.exceptions.AppException;
 import com.helthcare_management_sytem.patient_service.model.Patient;
 import com.helthcare_management_sytem.patient_service.service.PatientService;
+import com.helthcare_management_sytem.patient_service.util.PatientServiceConstants;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,19 @@ public class PatientController {
     private PatientService patientService;
 
     /**
+     * Handles AppException thrown by the application.
+     * This method captures the custom AppException and returns a response entity
+     * with the appropriate HTTP status code and error message.
+     *
+     * @param ex The AppException that was thrown.
+     * @return ResponseEntity containing the error message and the corresponding HTTP status code.
+     */
+    @ExceptionHandler(AppException.class)
+    public ResponseEntity<String> handleAppException(AppException ex) {
+        return ResponseEntity.status(ex.getCode()).body(ex.getMessage());
+    }
+
+    /**
      * Get all patients.
      * @return List of all patients.
      */
@@ -44,8 +59,22 @@ public class PatientController {
         if (patient.isPresent()){
             return ResponseEntity.ok(patient.get());
         } else {
-            return ResponseEntity.status(404).body("Patient not found");
+            return ResponseEntity.status(404).body(PatientServiceConstants.PATIENT_NOT_FOUND);
         }
+    }
+
+    /**
+     * Find patients by name.
+     * @param name The name of the patient to search for.
+     * @return ResponseEntity with a list of patients or a 404 status if not found.
+     */
+    @GetMapping("/findByName")
+    public ResponseEntity<List<Patient>> findPatientsByName(@RequestParam String name) {
+        List<Patient> patients = patientService.findByName(name);
+        if (patients.isEmpty()) {
+            return ResponseEntity.status(404).body(null);
+        }
+        return ResponseEntity.ok(patients);
     }
 
     /**
@@ -68,7 +97,7 @@ public class PatientController {
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updatePatient(@PathVariable Long id , @RequestBody Patient patient){
         String message = patientService.updatePatient(id, patient);
-        if (message.equals("Patient update successfully")){
+        if (message.equals(PatientServiceConstants.PATIENT_UPDATE_SUCCESSFULLY)){
             return ResponseEntity.ok(message);
         } else {
             return ResponseEntity.status(404).body(message);
@@ -83,7 +112,7 @@ public class PatientController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deletePatient(@PathVariable Long id){
         String message = patientService.deletePatient(id);
-        if (message.equals("Patient delete successfully")){
+        if (message.equals(PatientServiceConstants.PATIENT_DELETE_SUCCESSFULLY)){
             return ResponseEntity.ok(message);
         } else {
             return ResponseEntity.status(404).body(message);
