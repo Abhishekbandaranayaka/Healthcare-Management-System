@@ -80,7 +80,7 @@ public class AppointmentController {
      * @param id The ID of the appointment to cancel.
      * @return ResponseEntity with a success or failure message.
      */
-    @PutMapping("git ")
+    @PutMapping("/cancel/{id}")
     public ResponseEntity<String> cancelAppointment(@PathVariable Long id) {
         String message = appointmentService.cancelAppointment(id);
         if (message.equals(AppointmentServiceConstants.APPOINTMENT_CANCELLED_SUCCESSFULLY)) {
