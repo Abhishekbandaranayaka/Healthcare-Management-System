@@ -106,4 +106,13 @@ public class DoctorController {
             return ResponseEntity.status(404).body(message);
         }
     }
+    // DoctorController.java
+    @GetMapping("/findBySpecialization")
+    public ResponseEntity<List<Doctor>> findBySpecialization(@RequestParam String specialization) {
+        List<Doctor> doctors = doctorService.findBySpecialization(specialization);
+        if (doctors.isEmpty()) {
+            return ResponseEntity.status(404).body(null);
+        }
+        return ResponseEntity.ok(doctors);
+    }
 }

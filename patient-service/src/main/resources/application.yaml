@@ -1,7 +1,7 @@
 # Configuring the datasource for PostgreSQL
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/healthcare-app  # URL of the PostgreSQL database
+    url: jdbc:postgresql://localhost:5432/helthcare-app  # URL of the PostgreSQL database
     username: postgres                                   # Database username
     password: 1234                                      # Database password
     driver-class-name: org.postgresql.Driver             # PostgreSQL JDBC driver

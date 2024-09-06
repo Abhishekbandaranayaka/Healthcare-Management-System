@@ -13,6 +13,7 @@ import java.util.List;
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     List<Doctor> findByFirstName(String firstName);
+    public List<Doctor> findBySpecialization(String specialization);
 
 }
 
