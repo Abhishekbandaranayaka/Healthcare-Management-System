@@ -101,4 +101,9 @@ public class DoctorServiceImpl implements DoctorService {
         return doctors;
     }
 
+
+    public List<Doctor> findBySpecialization(String specialization) {
+        return doctorRepository.findBySpecialization(specialization);
+    }
+
 }
