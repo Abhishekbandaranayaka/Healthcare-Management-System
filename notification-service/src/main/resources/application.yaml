@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: notification-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/healthcare-app
+  logging:
+    level:
+      root: INFO
+      org.springframework.data.mongodb: DEBUG
+      com.mongodb: DEBUG
+server:
+  port: 8086
+
+
