@@ -1,7 +1,8 @@
-package com.healthcare_app.notification_service.service;
+package com.healthcare_app.notification_service.service.Impl;
 
 import com.healthcare_app.notification_service.model.Notification;
 import com.healthcare_app.notification_service.repository.NotificationRepository;
+import com.healthcare_app.notification_service.service.NotificationService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
