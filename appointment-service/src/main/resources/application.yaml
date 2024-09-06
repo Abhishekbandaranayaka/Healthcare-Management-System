@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/healthcare-app
+    url: jdbc:postgresql://localhost:5432/helthcare-app
     username: postgres
-    password: 123
+    password: 1234
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

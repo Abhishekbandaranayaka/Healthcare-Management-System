@@ -10,6 +10,8 @@ import java.util.List;
 /**
  * The NotificationController class handles HTTP requests related to notifications.
  * It provides endpoints for sending and listing notifications.
+ * * Author: S.T Fernando
+ * *Date: 2024/07/29
  */
 @RestController
 @RequestMapping("/api/notifications")
@@ -36,6 +38,12 @@ public class NotificationController {
     @GetMapping("/list")
     public ResponseEntity<List<Notification>> listNotifications() {
         List<Notification> notifications = notificationService.listNotifications();
+        return ResponseEntity.ok(notifications);
+    }
+
+    @GetMapping("/patient/{patientId}")
+    public ResponseEntity<List<Notification>> getNotificationByPatientId(@PathVariable Long patientId){
+        List<Notification> notifications = notificationService.getNotificationsByPatientId(patientId);
         return ResponseEntity.ok(notifications);
     }
 }

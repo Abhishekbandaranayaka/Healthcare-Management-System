@@ -15,7 +15,8 @@ public interface DoctorService {
 
     Optional<Doctor> getDoctorById(Long id);
 
-    List<Doctor> findByName(String name);
+    List<Doctor> findByFirstName(String name);
+    List<Doctor> findBySpecialization(String specialization);
 
     String saveDoctor(Doctor doctor);
 
